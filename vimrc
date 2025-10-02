@@ -48,7 +48,7 @@ set tags=./tags; "locate tags file for ctags
 
 "------------------------------  MACROS ----------------------------------
 "Remove whitespaces at the end of the line
-let @a=':%s/\s\+$//' "pressing @a in a file will remove all spaces at the end of a line (typing ctrl + v followed by enter gives ^M)
+let @a=':%s/\s\+$//' "pressing @a in a file will remove all spaces at the end of a line (typing ctrl + v followed by enter gives ^M)
 
 "------------------------- LEADER KEY SHORTCUTS --------------------------
 let mapleader = "\<Space>"
@@ -75,8 +75,6 @@ noremap <Leader>n :!make clean && make report <enter>
 noremap <Leader>i :!make install <enter>
 "save current session
 noremap <silent> <Leader>s :mksession <enter>
-"leader + v to open myvimrc file in a vsplit
-nnoremap <leader>v :vsplit ~/.myvimrc<cr>
 "leader + f to invoke astyle on current file 
 nnoremap <leader>f :%!astyle<cr>
 "leader + c in visual mode will comment out a block of lines
@@ -86,7 +84,7 @@ vmap <Leader>c <C-V>I//<Esc><Esc>
 "If vim-plug isn't installed, install it
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync
 else
 	"plugin installed, load plugins
 	call plug#begin('~/.vim/plugged')
@@ -176,7 +174,6 @@ let c_space_errors = 1 "highlight trailing white space for c files
 " Automatically reload vimrc when a write to it is detected
 augroup reload_vimrc
     autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
 " Airline settings
@@ -208,4 +205,3 @@ let g:gitgutter_max_signs = 5000 "max diff of 5000 lines
 let g:snipMate = { 'snippet_version' : 1 }
 
 " Add custom vim settings
-source $HOME/.myvimrc

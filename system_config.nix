@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-    nix.settings.experimental-features = "nix-command flakes";
+    # nix.settings.experimental-features = "nix-command flakes";
 
     users.users.emily = {
         isNormalUser = true;
@@ -14,5 +14,6 @@
         shell = pkgs.zsh;
     };
 
+    programs.zsh.enable = true;
     services.xserver.enable = true;
 }

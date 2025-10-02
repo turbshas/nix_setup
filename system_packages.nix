@@ -7,6 +7,8 @@
         zsh
         silver-searcher
         screen
-        ssh
+        openssh
+        powerline-fonts
+        oh-my-zsh
     ];
 }
