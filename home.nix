@@ -1,4 +1,26 @@
 { inputs, pkgs, ... }:
+let 
+    spaceshipPrompt = builtins.fetchGit {
+        url = "https://github.com/denysdovhan/spaceship-prompt.git";
+        ref = "master";
+        rev = "0acfcd2513025ee33a4ae071df163503ff112b11";
+    };
+    aliasTips = builtins.fetchGit {
+        url = "https://github.com/djui/alias-tips.git";
+        rev = "41cb143ccc3b8cc444bf20257276cb43275f65c4";
+        ref = "master";
+    };
+    zshAutosuggest = builtins.fetchGit {
+        url = "https://github.com/zsh-users/zsh-autosuggestions";
+        rev = "85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5";
+        ref = "master";
+    };
+    zshNotify = builtins.fetchGit {
+        url =  "https://github.com/marzocchi/zsh-notify.git";
+        rev = "9c1dac81a48ec85d742ebf236172b4d92aab2f3f";
+        ref = "master";
+    };
+in 
 {
     home = {
         username = "emily";
@@ -10,6 +32,7 @@
         # (pkgs.callPackage ./runpod { })
         # shell config
         starship # prompt
+        oh-my-zsh
 
         vscode
         github-desktop
@@ -52,6 +75,17 @@
         ".vim/ftplugin/make.vim" = {
             text = "setlocal noexpandtab";
         };
+
+        # Zsh/Oh My Zsh customizations.
+        ".oh-my-zsh" = {
+            source = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
+            recursive = true;
+        };
+        # Themes
+        ".oh-my-zsh/custom/themes/spaceship.zsh-theme" = { source = "${spaceshipPrompt}/spaceship.zsh-theme"; };
+        ".oh-my-zsh/custom/plugins/alias-tips" = { source = "${aliasTips}"; };
+        ".oh-my-zsh/custom/plugins/zsh-autosuggestions" = { source = "${zshAutosuggest}"; };
+        ".oh-my-zsh/custom/plugins/notify" = { source = "${zshNotify}"; };
     };
 
     home.sessionVariables = { };
@@ -63,10 +97,14 @@
 
     programs.zsh = {
         enable = true;
+        oh-my-zsh = {
+            enable = true;
+            theme = "robbyrussell";
+        };
     };
     programs.git = {
         enable = true;
-        userEmail = "turbshas@gmail.com";
+        userEmail = "emilyurbshas@gmail.com";
         userName = "Emily Urbshas";
         extraConfig = {
             pull.rebase = true;
