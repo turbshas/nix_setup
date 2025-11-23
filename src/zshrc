@@ -302,3 +302,5 @@ export TERM=xterm-256color
 if [ -e "$HOME/.myzshrc" ]; then
     source $HOME/.myzshrc
 fi
+
+eval "$(direnv hook zsh)"

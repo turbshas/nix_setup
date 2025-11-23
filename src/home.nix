@@ -33,7 +33,6 @@ in
 
         vscode
         github-desktop
-        devenv
 
         # debuggers
         lldb
