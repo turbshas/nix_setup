@@ -29,9 +29,6 @@ in
     };
 
     home.packages = with pkgs; [
-        # (pkgs.callPackage ./runpod { })
-        # shell config
-        starship # prompt
         oh-my-zsh
 
         vscode
@@ -64,6 +61,7 @@ in
             source = ./vimrc;
             target = ".vimrc";
             # Open vim once to install Plug, then open vim again to install all plugins.
+            # TODO: setup vim automatically
             # onChange = "vim +qall\nvim '+PlugInstall --sync' +qall";
         };
         ".vim/colors/badwolf.vim" = {

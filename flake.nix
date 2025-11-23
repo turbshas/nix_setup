@@ -6,12 +6,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
             url = "github:nix-community/home-manager/release-24.11";
         };
-        # cscope_maps = builtins.fetchUrl {
-        #     url = "http://cscope.sourceforge.net/cscope_maps.vim";
-        # };
-        # badwolf = builtins.fetchUrl {
-        #     url = "https://raw.githubusercontent.com/sjl/badwolf/master/colors/badwolf.vim";
-        # };
     };
     outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
