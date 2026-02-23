@@ -49,6 +49,7 @@ in
         networkmanager-openvpn
         # The gameler
         steam
+        xivlauncher
     ];
 
     home.file = {
