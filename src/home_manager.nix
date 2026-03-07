@@ -5,7 +5,4 @@
         useUserPackages = true;
         backupFileExtension = "hm-backup";
     };
-
-    # xsession.enable = true;
-    # xsession.windowManager.command = "…";
 }

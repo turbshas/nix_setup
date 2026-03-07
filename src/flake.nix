@@ -1,10 +1,10 @@
 {
     description = "My lil NixOS configy :3";
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
         home-manager = {
             inputs.nixpkgs.follows = "nixpkgs";
-            url = "github:nix-community/home-manager/release-24.11";
+            url = "github:nix-community/home-manager/release-25.11";
         };
     };
     outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
@@ -25,6 +25,7 @@
                     # arguments to home.nix
                 }
                 ./home_manager.nix
+                ./asus_laptop_config.nix
             ];
         };
     };

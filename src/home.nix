@@ -33,6 +33,9 @@ in
 
         vscode
         github-desktop
+        discord
+        neovim
+        signal-desktop
 
         # debuggers
         lldb
@@ -53,10 +56,6 @@ in
     ];
 
     home.file = {
-        ".zshrc" = {
-            source = ./zshrc;
-            target = ".zshrc";
-        };
         ".vimrc" = {
             source = ./vimrc;
             target = ".vimrc";
@@ -99,20 +98,22 @@ in
             enable = true;
             theme = "robbyrussell";
         };
+        initContent = (builtins.readFile ./zshrc);
     };
     programs.git = {
         enable = true;
-        userEmail = "emilyurbshas@gmail.com";
-        userName = "Emily Urbshas";
-        extraConfig = {
+        settings = {
+            user.email = "emilyurbshas@gmail.com";
+            user.name = "Emily Urbshas";
             pull.rebase = true;
             rebase.autoStash = true;
             diff.tool = "default-difftool";
             push.autoSetupRemote = true;
         };
         lfs.enable = true;
-        delta.enable = true;
     };
-
-    # services.vscode-server.enable = true;
+    programs.delta = {
+        enable = true;
+        enableGitIntegration = true;
+    };
 }
