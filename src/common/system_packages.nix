@@ -16,5 +16,7 @@
         wmctrl
         xdotool
         usbutils
+        killall
+        libnotify # for notify-send (for zsh-notify)
     ];
 }

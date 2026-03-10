@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
     nix.gc.automatic = true;
     nix.gc.persistent = true;
@@ -25,7 +25,6 @@
             enable = true;
         };
     };
-    services.xserver.enable = true;
 
     # Enable OpenGL
     hardware.graphics = {

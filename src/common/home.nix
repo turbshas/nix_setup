@@ -36,6 +36,7 @@ in
         discord
         neovim
         signal-desktop
+        vlc
 
         # debuggers
         lldb
@@ -57,17 +58,17 @@ in
 
     home.file = {
         ".vimrc" = {
-            source = ./vimrc;
+            source = ../assets/vimrc;
             target = ".vimrc";
             # Open vim once to install Plug, then open vim again to install all plugins.
             # TODO: setup vim automatically
             # onChange = "vim +qall\nvim '+PlugInstall --sync' +qall";
         };
         ".vim/colors/badwolf.vim" = {
-            source = ./badwolf.vim;
+            source = ../assets/badwolf.vim;
         };
         ".vim/plugins/cscops_maps.vim" = {
-            source = ./cscope_maps.vim;
+            source = ../assets/cscope_maps.vim;
         };
         ".vim/ftplugin/make.vim" = {
             text = "setlocal noexpandtab";
@@ -98,7 +99,7 @@ in
             enable = true;
             theme = "robbyrussell";
         };
-        initContent = (builtins.readFile ./zshrc);
+        initContent = (builtins.readFile ../assets/zshrc);
     };
     programs.git = {
         enable = true;
@@ -116,4 +117,6 @@ in
         enable = true;
         enableGitIntegration = true;
     };
+
+    imports = [ ./plasma_manager_config.nix ];
 }
