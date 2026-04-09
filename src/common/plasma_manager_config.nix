@@ -39,5 +39,28 @@ in
                 extraSettings = (builtins.readFile ../assets/kde_taskbar_extra_settings.js);
             }
         ];
+    
+        powerdevil.AC = {
+            autoSuspend = {
+                action = "sleep";
+                idleTimeout = 3600;
+            };
+
+            dimDisplay = {
+                enable = true;
+                idleTimeout = 900;
+            };
+
+            turnOffDisplay = {
+                enable = true;
+                idleTimeout = 1800;
+                idleTimeoutWhenLocked = 60;
+            };
+
+            dimKeyboard.enable = true;
+            powerButtonAction = "lockScreen";
+            whenLaptopLidClosed = "sleep";
+            whenSleepingEnter = "standby";
+        };
     };
 }

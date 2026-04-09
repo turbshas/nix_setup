@@ -9,6 +9,7 @@ const pinnedApps = [
     "applications:code.desktop",
     "applications:xivlauncher.desktop",
 ];
+
 const allPanels = panels();
 for (const panel of allPanels || []) {
     const taskBarWidgets = panel.widgets("org.kde.plasma.icontasks");

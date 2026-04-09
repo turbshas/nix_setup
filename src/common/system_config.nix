@@ -31,4 +31,10 @@
         enable = true;
         enable32Bit = true;
     };
+
+    systemd.sleep.extraConfig = ''
+        AllowHibernation=no
+        AllowHybridSleep=no
+        AllowSuspendThenHibernate=no
+    '';
 }
