@@ -6,18 +6,38 @@ let
         scrollMethod = "twoFingers";
         twoFingerTap = "rightClick";
     };
+    powerConfig = {
+        autoSuspend = {
+            action = "sleep";
+            idleTimeout = 3600;
+        };
+
+        dimDisplay = {
+            enable = true;
+            idleTimeout = 900;
+        };
+
+        turnOffDisplay = {
+            idleTimeout = 1800;
+            idleTimeoutWhenLocked = 60;
+        };
+
+        dimKeyboard.enable = true;
+        powerButtonAction = "lockScreen";
+        whenLaptopLidClosed = "sleep";
+        whenSleepingEnter = "standby";
+    };
 in
 {
     programs.plasma = {
         enable = true;
 
         input.touchpads = [
-            {
-                inherit touchpadConfig;
+            ({
                 vendorId = "0002";
                 productId = "000e";
                 name = "ETPS/2 Elantech Touchpad";
-            }
+            } // touchpadConfig)
         ];
 
         panels = [
@@ -40,27 +60,7 @@ in
             }
         ];
     
-        powerdevil.AC = {
-            autoSuspend = {
-                action = "sleep";
-                idleTimeout = 3600;
-            };
-
-            dimDisplay = {
-                enable = true;
-                idleTimeout = 900;
-            };
-
-            turnOffDisplay = {
-                enable = true;
-                idleTimeout = 1800;
-                idleTimeoutWhenLocked = 60;
-            };
-
-            dimKeyboard.enable = true;
-            powerButtonAction = "lockScreen";
-            whenLaptopLidClosed = "sleep";
-            whenSleepingEnter = "standby";
-        };
+        powerdevil.AC = powerConfig;
+        powerdevil.battery = powerConfig;
     };
 }

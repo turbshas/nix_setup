@@ -2,7 +2,7 @@
 {
     nix.gc.automatic = true;
     nix.gc.persistent = true;
-    nix.gc.options = "--delete-old";
+    nix.gc.options = "--delete-older-than 7d";
 
     services.automatic-timezoned.enable = true;
     services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";

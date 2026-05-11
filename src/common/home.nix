@@ -34,14 +34,12 @@ in
         vscode
         github-desktop
         discord
-        neovim
         signal-desktop
         vlc
 
         # debuggers
         lldb
         gdb
-        valgrind
 
         # RDP client
         remmina
@@ -101,6 +99,7 @@ in
         };
         initContent = (builtins.readFile ../assets/zshrc);
     };
+
     programs.git = {
         enable = true;
         settings = {
@@ -113,10 +112,14 @@ in
         };
         lfs.enable = true;
     };
+
     programs.delta = {
         enable = true;
         enableGitIntegration = true;
     };
 
-    imports = [ ./plasma_manager_config.nix ];
+    imports = [
+        ./plasma_manager_config.nix
+        ./vim_setup.nix
+    ];
 }
