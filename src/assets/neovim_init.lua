@@ -1,3 +1,61 @@
+------------------------------------
+-- Settings
+------------------------------------
+vim.opt.syntax = "on" -- turn on syntax highlighting
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.hidden = true -- Allow hidden buffers.
+vim.opt.mouse = "a"
+
+-- tab settings
+vim.opt.expandtab = true -- expand tabs to spaces
+vim.opt.tabstop = 4 -- number of spaces that a <tab> in the file counts for
+vim.opt.softtabstop = 4 -- number of spaces that a <tab> counts for while performing editing operations
+vim.opt.shiftwidth = 4
+vim.opt.autoindent = true -- automatically align to indentation for a new line
+
+vim.opt.hlsearch = true -- turn on search pattern highlighting
+vim.opt.ignorecase = true -- ignore case when searching...
+vim.opt.smartcase = true -- ... unless pattern has uppercase character
+vim.opt.incsearch = true -- enable incremental matches
+vim.opt.list = true -- display tabs and line endings
+vim.opt.listchars = "trail:-,tab:--" -- change the way tabs and line ends are displayed
+
+-- -------------------------------------------------------------
+-- Key mappings
+-- -------------------------------------------------------------
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true, remap = true }
+
+map('n', '<A-/>', '<Cmd>norm gcc<CR>', opts)
+map('v', '<A-/>', '<Cmd>norm gc<CR>', opts)
+map('i', '<A-[>', '<Esc>', opts)
+
+-- barbar ---------------
+-- Move to previous/next
+map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+
+-- Re-order to previous/next
+map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+
+-- Goto buffer in position...
+map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+
+-------------------------
+-- Plugin configs
+-------------------------
 -- telescope.nvim ----------
 -- local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -31,28 +89,6 @@ require('telescope').setup {
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
-----------------------------
-
--- projects.nvim -----------
---  Mappings:
---    Normal mode 	Insert mode 	Action
---    f 	<c-f> 	find_project_files
---    b 	<c-b> 	browse_project_files
---    d 	<c-d> 	delete_project
---    s 	<c-s> 	search_in_project_files
---    r 	<c-r> 	recent_project_files
---    w 	<c-w> 	change_working_directory
-require("nvim-tree").setup({
-    sync_root_with_cwd = true,
-    respect_buf_cwd = true,
-    update_focused_file = {
-        enable = true,
-        update_root = true
-    },
-})
-
-require('telescope').load_extension('projects')
-require('telescope').extensions.projects.projects{}
 ----------------------------
 
 -- indent-blankline.nvim ---
@@ -124,6 +160,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- vim.lsp.enable('<YOUR_LSP_SERVER>')
 ----------------------------
 
--- toggleterm.nvim ---------
-require("toggleterm").setup{}
-----------------------------
+require("toggleterm").setup()
+require("barbar").setup()
+require('gitsigns').setup()
+require("nvim-web-devicons").setup()

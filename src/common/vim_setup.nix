@@ -10,62 +10,64 @@
         withPython3 = true;
         withRuby = true;
 
-        plugins = [
-# TODO: figure out how to initialize these plugins on neovim start
-
+        plugins = with pkgs.vimPlugins; [
             # Styling
-            pkgs.vimPlugins.nvim-web-devicons
+            nvim-web-devicons
+
+            # Editor tab bar.
+            barbar-nvim
+            gitsigns-nvim # Tab bar git integration.
+
+            # Editor breadcrumbs.
+            dropbar-nvim
 
             # File searching
-            pkgs.vimPlugins.telescope-nvim
-            pkgs.vimPlugins.telescope-fzf-native-nvim
+            telescope-nvim
+            telescope-fzf-native-nvim
 
             # Debugging
-            pkgs.vimPlugins.nvim-dap
-            pkgs.vimPlugins.nvim-dap-ui
+            nvim-dap
+            nvim-dap-ui
 
             # LSP
-            pkgs.vimPlugins.nvim-lsp-file-operations
+            nvim-lsp-file-operations
 
             # File explorer
-            pkgs.vimPlugins.neo-tree-nvim
-            pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+            neo-tree-nvim
+            nvim-treesitter.withAllGrammars
 
             # Misc/idk
-            pkgs.vimPlugins.plenary-nvim
-
-            # Project management - try :Telescope projects
-            pkgs.vimPlugins.project-nvim
+            plenary-nvim
 
             # Suggestion pop-up for commands/keys.
-            pkgs.vimPlugins.which-key-nvim
+            which-key-nvim
 
             # Highlight word under the cursor.
-            pkgs.vimPlugins.vim-illuminate
+            vim-illuminate
 
             # Adds indentation guides.
-            pkgs.vimPlugins.indent-blankline-nvim
+            indent-blankline-nvim
 
             # Completion engine while typing.
-            pkgs.vimPlugins.nvim-cmp
+            nvim-cmp
 
             # nvim-cmp supporting plugins.
-            pkgs.vimPlugins.cmp-nvim-lsp
-            pkgs.vimPlugins.cmp-buffer
-            pkgs.vimPlugins.cmp-path
-            pkgs.vimPlugins.luasnip
+            cmp-nvim-lsp
+            cmp-buffer
+            cmp-path
+            # luasnip
         
             # Improved scrolling behavior.
-            pkgs.vimPlugins.neoscroll-nvim
+            neoscroll-nvim
 
             # Improved behavior for splitting/resizing windows.
-            pkgs.vimPlugins.smart-splits-nvim
+            smart-splits-nvim
 
             # Improved terminal mangement in-editor.
-            pkgs.vimPlugins.toggleterm-nvim
+            toggleterm-nvim
         ];
 
         extraConfig = lib.fileContents ../assets/init.vim;
-        extraLuaConfig = lib.fileContents ../assets/neovim_init.vim;
+        extraLuaConfig = lib.fileContents ../assets/neovim_init.lua;
     };
 }

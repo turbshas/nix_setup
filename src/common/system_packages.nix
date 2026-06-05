@@ -9,8 +9,6 @@
         screen
         openssh
         python314
-        # Used for zsh theming, but theoretically could be used elsewhere.
-        powerline-fonts
         # Used for zsh plugins. Might as well install globally.
         python313Packages.pygments
         wmctrl
@@ -19,4 +17,11 @@
         killall
         libnotify # for notify-send (for zsh-notify)
     ];
+
+    fonts.packages = with pkgs; [
+        # Used for zsh and neovim theming, but theoretically could be used elsewhere.
+        # nerd-fonts.symbols-only
+        powerline-fonts
+        powerline-symbols
+    ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }
