@@ -1,7 +1,14 @@
 ------------------------------------
 -- Settings
 ------------------------------------
+
+-- vim.cmd.colorscheme colorscheme "catppuccin-nvim" -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+-- vim.cmd.colorscheme("tokyonight-storm") -- tokyonight, -night, -day, -moon
+vim.cmd.colorscheme("dracula") -- dracula, -soft
+
 vim.opt.syntax = "on" -- turn on syntax highlighting
+vim.cmd.filetype("on") -- enable file specific behaviour
+vim.cmd.filetype("plugin on") -- recognize what kind of file we are editing - c file, .h or makefile etc.
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -22,15 +29,36 @@ vim.opt.incsearch = true -- enable incremental matches
 vim.opt.list = true -- display tabs and line endings
 vim.opt.listchars = "trail:-,tab:--" -- change the way tabs and line ends are displayed
 
+vim.opt.wildmenu = true -- Enable enhanced command-line completion
+vim.opt.lazyredraw = true -- no screen redraw while executing macros, registers and other commands that haven't been typed
+-- Disabled because it messes with the file tree.
+-- vim.opt.autochdir = true -- change the working directory to the directory in which the file being opened lives
+vim.opt.cursorline = true -- highlight current line
+vim.opt.cinoptions = ":0,b1:" -- align switch case and break on switch statement
+vim.opt.history = 1000 -- remember 1000 commands/search strings
+
+vim.opt.autoread = true -- reread file if an external program has changed a file
+vim.opt.showmode = true -- show what mode we are in (insert, command, visual etc)
+-- vim.opt.statusline.append { "%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P" } -- show full path name of the file in the status bar
+vim.opt.laststatus = 2 -- Always show the status line
+vim.opt.showtabline = 2 -- Always show the buffer line
+vim.opt.termguicolors = true -- Enable 24-bit colours.
+
+-- Use Ag over Grep
+vim.opt.grepprg = "ag --nogroup --nocolor"
+
 -- -------------------------------------------------------------
 -- Key mappings
 -- -------------------------------------------------------------
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true, remap = true }
+local silentOpts = { silent = true, }
 
+-- gcc/gc toggle comment current/visual-mode selected lines
 map('n', '<A-/>', '<Cmd>norm gcc<CR>', opts)
 map('v', '<A-/>', '<Cmd>norm gc<CR>', opts)
-map('i', '<A-[>', '<Esc>', opts)
+map('', '<A-[>', '<Esc>', opts) -- replacement for ctrl+[
+map('n', '<A-w>', '<C-w>', opts) -- ctrl+w starts window selection
 
 -- barbar ---------------
 -- Move to previous/next
@@ -52,6 +80,12 @@ map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
 map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
 map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+
+-- if our '{' or '}' are not in the first column for a function, use find
+map("", "[[", "?{<CR>w99[{:nohl<CR>", silentOpts)
+map("", "][", "/}<CR>b99]}:nohl<CR>", silentOpts)
+map("", "]]", "j0[[%/{<CR>:nohl<CR>", silentOpts)
+map("", "[]", "k$][%?}<CR>:nohl<CR>", silentOpts)
 
 -------------------------
 -- Plugin configs
@@ -160,7 +194,30 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- vim.lsp.enable('<YOUR_LSP_SERVER>')
 ----------------------------
 
+require("gitsigns").setup()
 require("toggleterm").setup()
-require("barbar").setup()
+require("barbar").setup({
+    icons = {
+        buffer_index = "subscript",
+        gitsigns = {
+          added = {enabled = true, icon = '+'},
+          changed = {enabled = true, icon = '~'},
+          deleted = {enabled = true, icon = '-'},
+        },
+        separator = { left = "|", right = "|" },
+        separator_at_end = true,
+        preset = "powerline",
+    },
+})
 require('gitsigns').setup()
 require("nvim-web-devicons").setup()
+require("staline").setup({
+    defaults = {
+        full_path = true,
+    },
+    sections = {
+        left = { '- ', '-mode', 'left_sep_double', ' ', 'branch', "lsp" },
+        mid  = { 'file_name' },
+        right = { 'cool_symbol','right_sep_double', '-line_column' },
+    }
+})

@@ -11,6 +11,11 @@
         withRuby = true;
 
         plugins = with pkgs.vimPlugins; [
+            # Themes.
+            catppuccin-nvim
+            tokyonight-nvim
+            dracula-nvim
+
             # Styling
             nvim-web-devicons
 
@@ -20,6 +25,9 @@
 
             # Editor breadcrumbs.
             dropbar-nvim
+
+            # Editor status line.
+            staline-nvim
 
             # File searching
             telescope-nvim
