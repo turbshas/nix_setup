@@ -16,6 +16,8 @@
         usbutils
         killall
         libnotify # for notify-send (for zsh-notify)
+        samba # for windows VM
+        quickemu # for windows VM
     ];
 
     fonts.packages = with pkgs; [

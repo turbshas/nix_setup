@@ -14,6 +14,7 @@
             # Themes.
             catppuccin-nvim
             tokyonight-nvim
+            tokyodark-nvim
             dracula-nvim
 
             # Styling
