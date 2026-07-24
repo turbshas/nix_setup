@@ -31,8 +31,6 @@ in
     home.packages = with pkgs; [
         oh-my-zsh
 
-        vscode
-        github-desktop
         discord
         signal-desktop
         vlc
@@ -116,6 +114,15 @@ in
     programs.delta = {
         enable = true;
         enableGitIntegration = true;
+    };
+
+    programs.kitty = {
+        enable = true;
+        shellIntegration = {
+            enableBashIntegration = true;
+            enableZshIntegration = true;
+        };
+        extraConfig = (builtins.readFile ../assets/kitty.conf);
     };
 
     imports = [

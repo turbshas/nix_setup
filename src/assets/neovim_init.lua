@@ -50,6 +50,7 @@ vim.opt.grepprg = "ag --nogroup --nocolor"
 -- -------------------------------------------------------------
 -- Key mappings
 -- -------------------------------------------------------------
+vim.g.mapleader = "<Space>"
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true, remap = true }
 local silentOpts = { silent = true, }
@@ -57,7 +58,8 @@ local silentOpts = { silent = true, }
 -- gcc/gc toggle comment current/visual-mode selected lines
 map('n', '<A-/>', '<Cmd>norm gcc<CR>', opts)
 map('v', '<A-/>', '<Cmd>norm gc<CR>', opts)
-map('', '<A-[>', '<Esc>', opts) -- replacement for ctrl+[
+map('i', '<A-[>', '<Esc>', opts) -- replacement for ctrl+[
+map('v', '<A-[>', '<Esc>', opts) -- replacement for ctrl+[
 map('n', '<A-w>', '<C-w>', opts) -- ctrl+w starts window selection
 
 -- barbar ---------------
@@ -81,11 +83,33 @@ map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
 map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
+-- Close buffer without closing window (moves to next buffer, then deletes previous).
+map('n', '<A-d>', '<Cmd>BufferNext<CR><Cmd>BufferDelete#<CR>', opts)
+
 -- if our '{' or '}' are not in the first column for a function, use find
 map("", "[[", "?{<CR>w99[{:nohl<CR>", silentOpts)
 map("", "][", "/}<CR>b99]}:nohl<CR>", silentOpts)
 map("", "]]", "j0[[%/{<CR>:nohl<CR>", silentOpts)
 map("", "[]", "k$][%?}<CR>:nohl<CR>", silentOpts)
+
+-- Key commands to copy/paste from system clipboard.
+map("v", "<C-c>", "\"+y", opts)
+map("n", "<A-y>", "\"+y", opts)
+map("v", "<A-y>", "\"+y", opts)
+map("n", "<A-x>", "\"+d", opts)
+map("v", "<A-x>", "\"+d", opts)
+map("n", "<A-p>", "\"+p", opts)
+map("v", "<A-p>", "\"+p", opts)
+
+-- Ctrl-V to paste in insert mode.
+map("i", "<C-v>", "<C-r>+", opts)
+
+-- Telescope shortcuts
+local tsb = require('telescope.builtin')
+map('n', '<leader>ff', tsb.find_files, { desc = 'Telescope find files' })
+map('n', '<leader>fg', tsb.live_grep, { desc = 'Telescope live grep' })
+map('n', '<leader>fb', tsb.buffers, { desc = 'Telescope buffers' })
+map('n', '<leader>fh', tsb.help_tags, { desc = 'Telescope help tags' })
 
 -------------------------
 -- Plugin configs
@@ -220,4 +244,17 @@ require("staline").setup({
         mid  = { 'file_name' },
         right = { 'cool_symbol','right_sep_double', '-line_column' },
     }
+})
+require('neo-tree').setup({
+    filesystem = {
+        filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = true,
+            never_show = {
+                ".git",
+            },
+        },
+        use_libuv_watcher = true,
+    },
 })

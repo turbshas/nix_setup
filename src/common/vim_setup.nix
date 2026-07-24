@@ -77,6 +77,6 @@
         ];
 
         extraConfig = lib.fileContents ../assets/init.vim;
-        extraLuaConfig = lib.fileContents ../assets/neovim_init.lua;
+        initLua = lib.fileContents ../assets/neovim_init.lua;
     };
 }

@@ -4,8 +4,7 @@ const pinnedApps = [
     "applications:discord.desktop",
     "applications:signal.desktop",
     "applications:steam.desktop",
-    "applications:org.kde.konsole.desktop",
-    "applications:code.desktop",
+    "applications:kitty.desktop",
     "applications:xivlauncher.desktop",
 ];
 
