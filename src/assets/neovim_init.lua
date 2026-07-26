@@ -255,6 +255,6 @@ require('neo-tree').setup({
                 ".git",
             },
         },
-        use_libuv_watcher = true,
+        use_libuv_file_watcher = true,
     },
 })
