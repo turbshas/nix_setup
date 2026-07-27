@@ -111,6 +111,22 @@ map('n', '<leader>fg', tsb.live_grep, { desc = 'Telescope live grep' })
 map('n', '<leader>fb', tsb.buffers, { desc = 'Telescope buffers' })
 map('n', '<leader>fh', tsb.help_tags, { desc = 'Telescope help tags' })
 
+-- Changing current buffer highlight to be more noticeable.
+function setColors()
+    local current_fg = "#4c4f6a"
+    local current_bg = "#eff1f6"
+    vim.api.nvim_set_hl(0, 'BufferCurrentSign', { fg = current_fg, bg = current_bg })
+    vim.api.nvim_set_hl(0, 'BufferCurrentSignRight', { fg = current_fg, bg = current_bg })
+end
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+    callback = function ()
+        setColors()
+    end,
+})
+
+setColors()
+
 -------------------------
 -- Plugin configs
 -------------------------
