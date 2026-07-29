@@ -47,6 +47,25 @@ vim.opt.termguicolors = true -- Enable 24-bit colours.
 -- Use Ag over Grep
 vim.opt.grepprg = "ag --nogroup --nocolor"
 
+-- Turn on diagnostics.
+vim.diagnostic.config({
+    underline = true,
+    signs = true,
+    virtual_lines = true,
+})
+vim.lsp.enable(
+    "verible"
+)
+-- Disable "pull" diagnostics for verible to avoid duplicates (Neovim issue #29927)
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "verible" then
+            client.server_capabilities.diagnosticProvider = nil
+        end
+    end,
+})
+
 -- -------------------------------------------------------------
 -- Key mappings
 -- -------------------------------------------------------------
@@ -103,6 +122,9 @@ map("v", "<A-p>", "\"+p", opts)
 
 -- Ctrl-V to paste in insert mode.
 map("i", "<C-v>", "<C-r>+", opts)
+
+-- Focus on Neotree file explorer.
+map("n", "<A-f>", "<Cmd>Neotree action=focus<CR>", opts)
 
 -- Telescope shortcuts
 local tsb = require('telescope.builtin')

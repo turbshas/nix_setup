@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }:
 {
+    # Packages needed for LSPs.
+    home.packages = with pkgs; [
+        verible
+    ];
+
     programs.neovim = {
         enable = true;
         defaultEditor = true;
@@ -40,6 +45,7 @@
 
             # LSP
             nvim-lsp-file-operations
+            nvim-lspconfig
 
             # File explorer
             neo-tree-nvim

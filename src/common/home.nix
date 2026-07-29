@@ -20,6 +20,11 @@ let
         rev = "9c1dac81a48ec85d742ebf236172b4d92aab2f3f";
         ref = "master";
     };
+    # Was to be used for getting latest signal, but unstable doesn't have latest anyway.
+    # unstablePackages = import (fetchTarball {
+    #     url = "channel:nixos-unstable";
+    #     sha256 = "01vhgw5s0sw5makh0i6mhdbz1ilfyhl8mymdh780x37v3mpyqqr6";
+    # }) { config = inputs.config.nixpkgs.config; };
 in 
 {
     home = {
