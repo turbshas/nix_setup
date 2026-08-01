@@ -2,7 +2,7 @@ const pinnedApps = [
     "preferred://filemanager",
     "preferred://browser",
     "applications:discord.desktop",
-    "applications:signal.desktop",
+    "applications:signal-desktop.desktop",
     "applications:steam.desktop",
     "applications:kitty.desktop",
     "applications:xivlauncher.desktop",

@@ -103,7 +103,7 @@ map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
 -- Close buffer without closing window (moves to next buffer, then deletes previous).
-map('n', '<A-d>', '<Cmd>BufferNext<CR><Cmd>BufferDelete#<CR>', opts)
+map('n', '<A-d>', '<Cmd>BufferPrevious<CR><Cmd>BufferDelete#<CR>', opts)
 
 -- if our '{' or '}' are not in the first column for a function, use find
 map("", "[[", "?{<CR>w99[{:nohl<CR>", silentOpts)
