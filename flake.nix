@@ -12,27 +12,29 @@
             inputs.home-manager.follows = "home-manager";
         };
     };
-    outputs = inputs@{ self, nixpkgs, home-manager, plasma-manager, ... }: {
-        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-                ./configuration.nix
-                ./src/common/system_config.nix
-                ./src/common/system_packages.nix
-                ./src/common/desktop_environment.nix
-                home-manager.nixosModules.home-manager
-                {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.users.emily = ./src/common/home.nix;
-                    home-manager.extraSpecialArgs = { inherit inputs; };
-                    home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
-
-                    # Optionally, use home-manager.extraSpecialArgs to pass
-                    # arguments to home.nix
-                }
-                ./src/common/home_manager.nix
-                ./src/hardware/asus_laptop_config.nix
+    outputs = inputs@{ self, nixpkgs, home-manager, plasma-manager, ... }:
+    let
+        system = "x86_64-linux";
+        baseModules = [
+            ./src/common/system_config.nix
+            ./src/common/system_packages.nix
+            ./src/common/desktop_environment.nix
+            ./src/common/home_manager.nix
+            home-manager.nixosModules.home-manager
+            {
+                home-manager.users.emily = ./src/common/home.nix;
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+                # Optionally, use home-manager.extraSpecialArgs to pass
+                # arguments to home.nix
+            }
+        ];
+    in
+    {
+        nixosConfigurations.asus-laptop = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = baseModules ++ [
+                ./src/hardware/asus_laptop/asus_laptop_config.nix
             ];
         };
     };

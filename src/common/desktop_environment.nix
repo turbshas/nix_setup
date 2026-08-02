@@ -5,9 +5,6 @@
         displayManager.sddm.enable = true;
         displayManager.sddm.wayland.enable = true;
     };
-    # Overriding defaults in configuration.nix
-    services.displayManager.gdm.enable = lib.mkForce false;
-    services.desktopManager.gnome.enable = lib.mkForce false;
 
     environment.systemPackages = with pkgs; [
         # KDE Utilities

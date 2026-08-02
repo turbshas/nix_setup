@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+    imports = [
+        ./hardware-configuration.nix
+    ];
+
     boot.extraModulePackages = [
         # Add support for USB WiFi dongle
         config.boot.kernelPackages.rtl88x2bu
