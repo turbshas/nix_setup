@@ -17,22 +17,22 @@
             system = "x86_64-linux";
             modules = [
                 ./configuration.nix
-                ./common/system_config.nix
-                ./common/system_packages.nix
-                ./common/desktop_environment.nix
+                ./src/common/system_config.nix
+                ./src/common/system_packages.nix
+                ./src/common/desktop_environment.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
-                    home-manager.users.emily = ./common/home.nix;
+                    home-manager.users.emily = ./src/common/home.nix;
                     home-manager.extraSpecialArgs = { inherit inputs; };
                     home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
 
                     # Optionally, use home-manager.extraSpecialArgs to pass
                     # arguments to home.nix
                 }
-                ./common/home_manager.nix
-                ./hardware/asus_laptop_config.nix
+                ./src/common/home_manager.nix
+                ./src/hardware/asus_laptop_config.nix
             ];
         };
     };

@@ -1,3 +1,5 @@
 Session.vim
 *.sw[a-zA-Z]
+flake.lock
+result
 
