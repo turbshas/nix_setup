@@ -1,11 +1,15 @@
-set -exo pipefail
+#!/usr/bin/env bash
 
-# TODO: options for which hardware to install for - laptop/desktop/etc
-# or can I auto-determine?
+set -euxCo pipefail
 
-# TODO: can use specializations to switch between pc configs?
-# TODO: instead of copying the entire directory, can symlink the flake.nix into /etc/nixos/
+# SYSTEM_NAME=$1
+SYSTEM_NAME=asus-laptop
+
+if [ "$SYSTEM_NAME" != "asus-laptop" ]; then
+    echo "Invalid value for system name: '$1'" >&2
+    exit 1
+fi
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-sudo cp -a "${SCRIPT_DIR}/src/" /etc/nixos/
-sudo cp "${SCRIPT_DIR}/flake.nix" /etc/nixos/
-nixos-rebuild switch --sudo
+
+nixos-rebuild switch --sudo --flake $SCRIPT_DIR\#$SYSTEM_NAME

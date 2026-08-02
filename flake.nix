@@ -31,11 +31,19 @@
         ];
     in
     {
-        nixosConfigurations.asus-laptop = nixpkgs.lib.nixosSystem {
-            inherit system;
-            modules = baseModules ++ [
-                ./src/hardware/asus_laptop/asus_laptop_config.nix
-            ];
+        nixosConfigurations = {
+            # Just in case this accidentally happens I guess.
+            "default" = nixpkgs.lib.nixosSystem {
+                inherit system;
+                modules = baseModules;
+            };
+
+            "asus-laptop" = nixpkgs.lib.nixosSystem {
+                inherit system;
+                modules = baseModules ++ [
+                    ./src/hardware/asus_laptop/asus_laptop_config.nix
+                ];
+            };
         };
     };
 }

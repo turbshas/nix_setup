@@ -4,6 +4,8 @@
         ./hardware-configuration.nix
     ];
 
+    networking.hostName = "asus-laptop"; # Define your hostname.
+
     boot.extraModulePackages = [
         # Add support for USB WiFi dongle
         config.boot.kernelPackages.rtl88x2bu
