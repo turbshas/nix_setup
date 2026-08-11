@@ -34,6 +34,7 @@ in
         discord
         (pkgs.callPackage ./signal-desktop.nix { inherit pkgs; })
         vlc
+        libreoffice
 
         # debuggers
         lldb
@@ -50,6 +51,7 @@ in
         # The gameler
         steam
         xivlauncher
+        razergenie
     ];
 
     home.file = {
