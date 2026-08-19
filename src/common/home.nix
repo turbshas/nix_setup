@@ -50,8 +50,10 @@ in
         networkmanager-openvpn
         # The gameler
         steam
+        heroic
         xivlauncher
         razergenie
+        solaar
     ];
 
     home.file = {

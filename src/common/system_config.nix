@@ -37,6 +37,19 @@
         };
     };
 
+    # Razer peripheral management/support.
+    hardware.openrazer = {
+        enable = true;
+        users = [ "emily" ];
+    };
+
+    # Logitech peripheral support.
+    hardware.logitech = {
+        wireless = {
+            enable = true;
+        };
+    };
+
     # Enable OpenGL
     hardware.graphics = {
         enable = true;

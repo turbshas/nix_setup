@@ -18,6 +18,7 @@
         libnotify # for notify-send (for zsh-notify)
         samba # for windows VM
         quickemu # for windows VM
+        openrazer-daemon # for razer devices
     ];
 
     fonts.packages = with pkgs; [
