@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }:
 {
-    # Packages needed for LSPs.
+    # Packages needed for LSPs or other plugins.
     home.packages = with pkgs; [
         verible
+        ripgrep
     ];
 
     programs.neovim = {

@@ -18,6 +18,7 @@
         libnotify # for notify-send (for zsh-notify)
         samba # for windows VM
         quickemu # for windows VM
+        socat # also for vm
         openrazer-daemon # for razer devices
     ];
 
